@@ -4,70 +4,86 @@ rules_type: turnbased # Type de règles
 constant:
   # Constantes globales du projet
     -
-        cst_name: MAX_COLS
+        cst_name: LARGEUR_MAX
         cst_val: 512
         cst_comment: Largeur maximale de la grille de jeu
     -
-        cst_name: MAX_ROWS
+        cst_name: HAUTEUR_MAX
         cst_val: 512
         cst_comment: Hauteur maximale de la grille de jeu
     
 enum:
   # Énumérations du projet
     - 
-        enum_name: error
+        enum_name: erreur
         enum_summary:
             "Contient toutes les erreurs pouvant être levées par l'API de jeu"
         enum_field:
             - [ok, "Aucune erreur survenue"]
+            - [position_invalide, "Position non valide"]
             
     - 
-        enum_name: cell_type
+        enum_name: type_case
         enum_summary:
             "liste des types de cases du plateau"
         enum_field:
-            - [empty, "Case vide, sur laquelle il est possible d'aller"]
-            - [wall, "Case infranchissable"]
-            - [cellerror, "Erreur, cellule inexistante"]
+            - [vide, "Case vide, sur laquelle il est possible d'aller"]
+            - [mur, "Case infranchissable"]
+            - [case_invalide, "Erreur, cellule inexistante"]
             
 struct:
   # Structures du projet
     -
         str_name: position
-        str_summary: Represents a position in the board
+        str_summary: Représente une position
         str_tuple: yes
         str_field:
-            - [x, int, "X coordinate (number of the column)"]
-            - [y, int, "Y coordinate (number of the row)"]
+            - [x, int, "Coordonnée de la colonne"]
+            - [y, int, "Coordonnée de la ligne"]
+
+    -
+        str_name: carte
+        str_summary: Représente l'ensemble de la carte
+        str_tuple: yes
+        str_field:
+            - [contenu, type_case array, "Liste des case de la carte"]
+            - [pos, position array, "Liste des positions de la carte"]
             
 function:
   # Fonctions de l'API à rendre disponible.
     -
-        fct_name: get_player_position
+        fct_name: recuperer_position_joueur
         fct_summary: Renvoie la position de l'utilisateur
-        fct_ret_type: error
+        fct_ret_type: erreur
         fct_arg:
-            - [player_id, int, Identifiant du joueur]
-            
+            - [id_joueur, int, Identifiant du joueur]
+ 
     -
-        fct_name: move
+        fct_name: moi
+        fct_summary: Renvoie son identifiant de joueur
+        fct_ret_type: int
+        fct_arg: []
+ 
+    -
+        fct_name: bouger
         fct_summary: initie un déplacement
-        fct_ret_type: error
+        fct_ret_type: erreur
+        fct_action: yes
         fct_arg:
-            - [player_id, int, Identifiant du joueur]
+            - [id_joueur, int, Identifiant du joueur]
             - [var_x, int, Variation de vitesse horizontale (entre 1 et -1)]
             - [var_y, int, Variation de vitesse verticale (entre 1 et -1)]
             
     -
-        fct_name: get_map
+        fct_name: obtenir_carte
         fct_summary: Renvoie la carte du jeu
-        fct_ret_type: cell_type array array
+        fct_ret_type: carte
         fct_arg: []
         
     -
-        fct_name: get_cell_type
+        fct_name: get_type_case
         fct_summary: initie un déplacement
-        fct_ret_type: cell_type
+        fct_ret_type: type_case
         fct_arg:
             - [x, int, position horizontale]
             - [y, int, position verticale]
@@ -75,17 +91,17 @@ function:
 user_function:
   # Fonctions utilisateur du projet
     -
-        fct_name: init_game
+        fct_name: partie_init
         fct_summary: Initialisation du programme utilisateur avant le démarrage du jeu.
         fct_ret_type: void
         fct_arg: []
     -
-        fct_name: play_turn
+        fct_name: jouer_tour
         fct_summary: Fonction appelée à chaque tour de jeu.
         fct_ret_type: void
         fct_arg: []
     -
-        fct_name: play_turn
+        fct_name: partie_fin
         fct_summary: Fonction appelée à chaque tour de jeu.
         fct_ret_type: void
         fct_arg: []
