@@ -1,4 +1,4 @@
-name: Vectorun  # Nom du jeu
+name: vectorun  # Nom du jeu
 rules_type: turnbased # Type de règles
 
 constant:
@@ -47,14 +47,14 @@ function:
         fct_summary: Renvoie la position de l'utilisateur
         fct_ret_type: error
         fct_arg:
-            - [playerId, int, Identifiant du joueur]
+            - [player_id, int, Identifiant du joueur]
             
     -
         fct_name: move
         fct_summary: initie un déplacement
         fct_ret_type: error
         fct_arg:
-            - [playerId, int, Identifiant du joueur]
+            - [player_id, int, Identifiant du joueur]
             - [varX, int, Variation de vitesse horizontale (entre 1 et -1)]
             - [varY, int, Variation de vitesse verticale (entre 1 et -1)]
             
