@@ -55,8 +55,8 @@ function:
         fct_ret_type: error
         fct_arg:
             - [player_id, int, Identifiant du joueur]
-            - [varX, int, Variation de vitesse horizontale (entre 1 et -1)]
-            - [varY, int, Variation de vitesse verticale (entre 1 et -1)]
+            - [var_x, int, Variation de vitesse horizontale (entre 1 et -1)]
+            - [var_y, int, Variation de vitesse verticale (entre 1 et -1)]
             
     -
         fct_name: get_map
