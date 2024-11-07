@@ -7,3 +7,16 @@ waf-*-*/
 waf3-*-*/
 # Lockfile
 .lock-waf_*_build
+gen/src/action_bouger.cc
+gen/src/action_bouger.hh
+gen/src/actions.hh
+gen/src/api.cc
+gen/src/api.hh
+gen/src/constant.hh
+gen/src/entry.cc
+gen/src/game_state.cc
+gen/src/game_state.hh
+gen/src/interface.cc
+gen/src/rules.cc
+gen/src/rules.hh
+gen/wscript
