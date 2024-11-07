@@ -12,11 +12,12 @@
 
 
 /// Contient toutes les erreurs pouvant être levées par l'API de jeu
-typedef enum erreur
+typedef enum error
 {
     OK, ///< Aucune erreur survenue
     POSITION_INVALIDE, ///< Position non valide
-} erreur;
+    MOUVEMENT_INTERDIT, ///< Mouvement non valide. Vous foncez dans un mur !
+} error;
 
 /// liste des types de cases du plateau
 typedef enum type_case
@@ -34,9 +35,16 @@ typedef struct position
     int y; ///< Coordonnée de la ligne
 } position;
 
-/// Représente l'ensemble de la carte
-typedef struct carte
+/// Retourne une dimension de plateau
+typedef struct dimension
 {
-    std::vector<type_case> contenu; ///< Liste des case de la carte
-    std::vector<position> pos; ///< Liste des positions de la carte
-} carte;
+    int dim_x; ///< Dimension de la colonne
+    int dim_y; ///< Dimension de la ligne
+} dimension;
+
+/// Représente une case de la carte
+typedef struct pos_info
+{
+    type_case contenu; ///< Liste des case de la carte
+    position pos; ///< Liste des positions de la carte
+} pos_info;

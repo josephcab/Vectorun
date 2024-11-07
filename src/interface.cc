@@ -26,7 +26,7 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& arr)
 }
 
 
-extern "C" erreur api_recuperer_position_joueur(int id_joueur)
+extern "C" error api_recuperer_position_joueur(int id_joueur)
 {
     return api->recuperer_position_joueur(id_joueur);
 }
@@ -36,12 +36,17 @@ extern "C" int api_moi()
     return api->moi();
 }
 
-extern "C" erreur api_bouger(int id_joueur, int var_x, int var_y)
+extern "C" dimension api_dimension_carte()
+{
+    return api->dimension_carte();
+}
+
+extern "C" error api_bouger(int id_joueur, int var_x, int var_y)
 {
     return api->bouger(id_joueur, var_x, var_y);
 }
 
-extern "C" carte api_obtenir_carte()
+extern "C" std::vector<pos_info> api_obtenir_carte()
 {
     return api->obtenir_carte();
 }
@@ -51,9 +56,9 @@ extern "C" type_case api_get_type_case(int x, int y)
     return api->get_type_case(x, y);
 }
 
-extern "C" void api_afficher_erreur(erreur v)
+extern "C" void api_afficher_error(error v)
 {
-    api->afficher_erreur(v);
+    api->afficher_error(v);
 }
 
 extern "C" void api_afficher_type_case(type_case v)
@@ -66,12 +71,17 @@ extern "C" void api_afficher_position(position v)
     api->afficher_position(v);
 }
 
-extern "C" void api_afficher_carte(carte v)
+extern "C" void api_afficher_dimension(dimension v)
 {
-    api->afficher_carte(v);
+    api->afficher_dimension(v);
 }
 
-std::ostream& operator<<(std::ostream& os, erreur v)
+/* extern "C" void api_afficher_pos_info(pos_info v)
+{
+    api->afficher_pos_info(v);
+}
+ */
+std::ostream& operator<<(std::ostream& os, error v)
 {
     switch (v)
     {
@@ -81,14 +91,13 @@ std::ostream& operator<<(std::ostream& os, erreur v)
     case POSITION_INVALIDE:
         os << "POSITION_INVALIDE";
         break;
+    case MOUVEMENT_INTERDIT:
+        os << "MOUVEMENT_INTERDIT";
+        break;
     }
     return os;
 }
 
-extern "C" void api_afficher_erreur(erreur v)
-{
-    std::cerr << v << std::endl;
-}
 std::ostream& operator<<(std::ostream& os, type_case v)
 {
     switch (v)
@@ -106,11 +115,6 @@ std::ostream& operator<<(std::ostream& os, type_case v)
     return os;
 }
 
-extern "C" void api_afficher_type_case(type_case v)
-{
-    std::cerr << v << std::endl;
-}
-
 std::ostream& operator<<(std::ostream& os, position v)
 {
     os << "{ ";
@@ -123,11 +127,19 @@ std::ostream& operator<<(std::ostream& os, position v)
     return os;
 }
 
-extern "C" void api_afficher_position(position v)
+std::ostream& operator<<(std::ostream& os, dimension v)
 {
-    std::cerr << v << std::endl;
+    os << "{ ";
+    os << "dim_x"
+       << "=" << v.dim_x;
+    os << ", ";
+    os << "dim_y"
+       << "=" << v.dim_y;
+    os << " }";
+    return os;
 }
-std::ostream& operator<<(std::ostream& os, carte v)
+
+std::ostream& operator<<(std::ostream& os, pos_info v)
 {
     os << "{ ";
     os << "contenu"
@@ -137,9 +149,4 @@ std::ostream& operator<<(std::ostream& os, carte v)
        << "=" << v.pos;
     os << " }";
     return os;
-}
-
-extern "C" void api_afficher_carte(carte v)
-{
-    std::cerr << v << std::endl;
 }

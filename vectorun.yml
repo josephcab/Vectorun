@@ -15,12 +15,13 @@ constant:
 enum:
   # Énumérations du projet
     - 
-        enum_name: erreur
+        enum_name: error
         enum_summary:
             "Contient toutes les erreurs pouvant être levées par l'API de jeu"
         enum_field:
             - [ok, "Aucune erreur survenue"]
             - [position_invalide, "Position non valide"]
+            - [mouvement_interdit, "Mouvement non valide. Vous foncez dans un mur !"]
             
     - 
         enum_name: type_case
@@ -42,7 +43,15 @@ struct:
             - [y, int, "Coordonnée de la ligne"]
 
     -
-        str_name: case
+        str_name: dimension
+        str_summary: Retourne une dimension de plateau
+        str_tuple: yes
+        str_field:
+            - [dim_x, int, "Dimension de la colonne"]
+            - [dim_y, int, "Dimension de la ligne"]
+
+    -
+        str_name: pos_info
         str_summary: Représente une case de la carte
         str_tuple: yes
         str_field:
@@ -54,7 +63,7 @@ function:
     -
         fct_name: recuperer_position_joueur
         fct_summary: Renvoie la position de l'utilisateur
-        fct_ret_type: erreur
+        fct_ret_type: error
         fct_arg:
             - [id_joueur, int, Identifiant du joueur]
  
@@ -63,11 +72,17 @@ function:
         fct_summary: Renvoie son identifiant de joueur
         fct_ret_type: int
         fct_arg: []
+
+    -
+        fct_name: dimension_carte
+        fct_summary: Renvoie son identifiant de joueur
+        fct_ret_type: dimension
+        fct_arg: []
  
     -
         fct_name: bouger
         fct_summary: initie un déplacement
-        fct_ret_type: erreur
+        fct_ret_type: error
         fct_action: yes
         fct_arg:
             - [id_joueur, int, Identifiant du joueur]
@@ -77,7 +92,7 @@ function:
     -
         fct_name: obtenir_carte
         fct_summary: Renvoie la carte du jeu
-        fct_ret_type: case array
+        fct_ret_type: pos_info array
         fct_arg: []
         
     -

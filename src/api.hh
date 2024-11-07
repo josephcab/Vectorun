@@ -26,22 +26,25 @@ public:
     ~Api() {}
 
     /// Renvoie la position de l'utilisateur
-    erreur recuperer_position_joueur(int id_joueur);
+    error recuperer_position_joueur(int id_joueur);
 
     /// Renvoie son identifiant de joueur
     int moi();
+
+    /// Renvoie son identifiant de joueur
+    dimension dimension_carte();
 
     /// initie un déplacement
     ApiActionFunc<ActionBouger> bouger{this};
 
     /// Renvoie la carte du jeu
-    carte obtenir_carte();
+    std::vector<pos_info> obtenir_carte();
 
     /// initie un déplacement
     type_case get_type_case(int x, int y);
 
-    /// Affiche le contenu d'une valeur de type erreur
-    void afficher_erreur(erreur v);
+    /// Affiche le contenu d'une valeur de type error
+    void afficher_error(error v);
 
     /// Affiche le contenu d'une valeur de type type_case
     void afficher_type_case(type_case v);
@@ -49,7 +52,10 @@ public:
     /// Affiche le contenu d'une valeur de type position
     void afficher_position(position v);
 
-    /// Affiche le contenu d'une valeur de type carte
-    void afficher_carte(carte v);
+    /// Affiche le contenu d'une valeur de type dimension
+    void afficher_dimension(dimension v);
+
+    /// Affiche le contenu d'une valeur de type pos_info
+    void afficher_pos_info(pos_info v);
 
 };

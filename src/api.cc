@@ -16,7 +16,7 @@ Api::Api(std::unique_ptr<GameState> game_state,
     api = this;
 }
 
-erreur Api::recuperer_position_joueur(int id_joueur)
+error Api::recuperer_position_joueur(int id_joueur)
 {
     // TODO
     abort();
@@ -26,7 +26,12 @@ int Api::moi()
     // TODO
     abort();
 }
-carte Api::obtenir_carte()
+dimension Api::dimension_carte()
+{
+    // TODO
+    abort();
+}
+std::vector<pos_info> Api::obtenir_carte()
 {
     // TODO
     abort();
@@ -36,7 +41,7 @@ type_case Api::get_type_case(int x, int y)
     // TODO
     abort();
 }
-void Api::afficher_erreur(erreur v)
+void Api::afficher_error(error v)
 {
     // TODO
     abort();
@@ -51,7 +56,12 @@ void Api::afficher_position(position v)
     // TODO
     abort();
 }
-void Api::afficher_carte(carte v)
+void Api::afficher_dimension(dimension v)
+{
+    // TODO
+    abort();
+}
+void Api::afficher_pos_info(pos_info v)
 {
     // TODO
     abort();
